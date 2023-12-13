@@ -1,5 +1,19 @@
 # 健身課程管理系統
 
+## How to run the project
+
+```bash
+# Clone the project
+git clone --depth 1 https://github.com/Slope86/DatabaseProject112
+cd DatabaseProject112
+
+# Install dependencies
+yarn
+
+# Run the project
+yarn start
+```
+
 ## Project Descriptions
 
 1. The background of this database application:
