@@ -84,7 +84,7 @@ export const AuthProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
     const login = async (email, password) => {
-        const response = await axios.post('/api/auth/login', {
+        const response = await axios.post('http://140.120.14.106:5000/api/auth/login', {
             email,
             password,
         })
@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     const register = async (email, username, password) => {
-        const response = await axios.post('/api/auth/register', {
+        const response = await axios.post('http://140.120.14.106:5000/api/auth/register', {
             email,
             username,
             password,
