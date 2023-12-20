@@ -1,7 +1,8 @@
 import { Box, Card, Grid, Icon, IconButton, styled, Tooltip } from '@mui/material';
 import { Small } from 'app/components/Typography';
-import { Link } from 'react-router-dom';
-import React from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+// import {dashboardRoutes} from 'app/views/dashboard';
+
 const StyledCard = styled(Card)(({ theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
@@ -28,12 +29,12 @@ const Heading = styled('h6')(({ theme }) => ({
   color: theme.palette.primary.main,
 }));
 
-const StatCards = () => {
+const CourseCards = () => {
   const cardList = [
-    { name: 'New ', amount: 3050, icon: 'group' },
-    { name: 'This week Sales', amount: '$80,500', icon: 'attach_money' },
-    { name: 'Inventory Status', amount: '8.5% Stock Surplus', icon: 'store' },
-    { name: 'Orders to deliver', amount: '305 Orders', icon: 'shopping_cart' },
+    { name: 'Teacher Count', amount: 3050, icon: 'group' },
+    { name: 'Student Count', amount: '$80,500', icon: 'group' },
+    { name: 'Locations', amount: '8.5% Stock Surplus', icon: 'store' },
+    { name: 'Course', amount: '305 Orders', icon: 'class' },
   ];
 
   return (
@@ -50,12 +51,10 @@ const StatCards = () => {
             </ContentBox>
 
             <Tooltip title="View Details" placement="top">
-              {/* 使用 Link 將組件連接到指定的路徑 */}
-              <Link to="/Course/default">
-                <IconButton>
-                  <Icon>arrow_right_alt</Icon>
-                </IconButton>
-              </Link>
+              <IconButton>
+                <Icon>arrow_right_alt</Icon>
+
+              </IconButton>
             </Tooltip>
           </StyledCard>
         </Grid>
@@ -64,5 +63,4 @@ const StatCards = () => {
   );
 };
 
-export default StatCards;
-
+export default CourseCards;
