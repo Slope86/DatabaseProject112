@@ -29,7 +29,7 @@ const Brand = ({ children }) => {
           style={{ width: '24px', height: '24px' }}
         /> 
         <StyledSpan mode={mode} className="sidenavHoverShow">
-          Fit Lohas
+          Fit Lohas test
         </StyledSpan>
       </Box>
 

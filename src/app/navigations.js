@@ -1,5 +1,12 @@
 export const navigations = [
+
+  // { name: 'Home', iconText: 'SI', path: '/dashboard/default' },
+
+
   { name: 'Course Overview', path: '/dashboard/default', icon: 'dashboard' },
+
+ { name: 'Course', path: '/Course/default', icon: 'dashboard' },
+  
   { label: 'PAGES', type: 'label' },
   {
     name: 'Session/Auth',
@@ -11,7 +18,17 @@ export const navigations = [
       { name: 'Error', iconText: '404', path: '/session/404' },
     ],
   },
+
+  {
+    name: 'Course search',
+    icon: 'list',
+    children: [
+      { name: 'Course', iconText: 'SI', path: '' },
+    ],
+  },
+
   { label: 'Components', type: 'label' },
+
   {
     name: 'Components',
     icon: 'favorite',
