@@ -9,6 +9,8 @@ export const navigations = [
   { name: 'Course', path: '/Course/default', icon: 'class' },
   { name: 'Userlist', path: '/Userlist/default', icon: 'face' },
     { name: 'Teacher', path: '/Teacher/default', icon: 'dashboard' },
+    { name: 'MemRegForm', path: '/MemberReg/default', icon: 'dashboard' },
+    
 
 
   { label: 'PAGES', type: 'label' },

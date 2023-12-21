@@ -26,7 +26,7 @@ const Teacher_list = () => {
         <Breadcrumb routeSegments={[{ name: "Material", path: "/material" }, { name: "Table" }]} />
       </Box>
 
-      <SimpleCard title="Simple Table">
+      <SimpleCard title=" Teacher ">
         <Teacher_detail />
       </SimpleCard>
 

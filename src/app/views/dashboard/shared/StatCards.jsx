@@ -1,7 +1,9 @@
 import { Box, Card, Grid, Icon, IconButton, styled, Tooltip } from '@mui/material';
 import { Small } from 'app/components/Typography';
 import { Link } from 'react-router-dom';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios.js';
+
 
 const StyledCard = styled(Card)(({ theme }) => ({
   display: 'flex',
@@ -30,8 +32,31 @@ const Heading = styled('h6')(({ theme }) => ({
 }));
 
 const StatCards = () => {
+
+   const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          // const response = await axios.get('http://140.120.14.106:5000/users');
+          const response = await axios.get('http://140.120.14.106:5000/api/admin/teachers');
+          setData(response.data);
+        } catch (err) {
+          setError(err);
+        }
+      };
+
+      fetchData();
+    }, []);
+
+    if (!data || !data.teachers_count) {
+      return <div>Loading...</div>; // or any other fallback UI
+    }
+
   const cardList = [
-    { name: 'UserList ', amount: 3050,path:"/Userlist/default",  icon: 'group' },
+
+   { name: 'UserList', amount: 0, path: "/Userlist/default", icon: 'group' },
     { name: 'This week Sales',path:"/Userlist/default", amount: '$80,500', icon: 'attach_money' },
     { name: 'Inventory Status',path:"/Userlist/default", amount: '8.5% Stock Surplus', icon: 'store' },
     { name: 'Orders to deliver',path:"/Userlist/default", amount: '305 Orders', icon: 'shopping_cart' },

@@ -4,6 +4,7 @@ import dashboardRoutes from 'app/views/dashboard/DashboardRoutes';
 import CourseRoutes from 'app/views/dashboard/CourseRoutes';
 import UserlistRoutes from 'app/views/dashboard/UserlistRoutes';
 import TeacherRoutes from 'app/views/dashboard/TeacherRoutes';
+import Member_Reg_Routes from 'app/views/dashboard/Member_Reg_Routes';
 import materialRoutes from 'app/views/material-kit/MaterialRoutes';
 import NotFound from 'app/views/sessions/NotFound';
 import sessionRoutes from 'app/views/sessions/SessionRoutes';
@@ -18,13 +19,14 @@ const routes = [
         <MatxLayout />
       </AuthGuard>
     ),
-    children: [...dashboardRoutes, ...chartsRoute, ...materialRoutes, ...CourseRoutes, ...UserlistRoutes, ...TeacherRoutes],
+    children: [...dashboardRoutes, ...chartsRoute, ...materialRoutes, ...CourseRoutes, ...UserlistRoutes, ...TeacherRoutes, ...Member_Reg_Routes],
   },
   ...sessionRoutes,
   { path: '/', element: <Navigate to="dashboard/default" /> },
   { path: '/', element: <Navigate to="Course/default" /> },  
   { path: '/', element: <Navigate to="Userlist/default" /> },  
   { path: '/', element: <Navigate to="Teacher/default" /> },  
+  { path: '/', element: <Navigate to="MemberReg/default" /> }, 
   { path: '*', element: <NotFound /> },
 ];
 
