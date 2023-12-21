@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import { Paragraph } from 'app/components/Typography';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from 'axios.js';
 
 const CardHeader = styled(Box)(() => ({
   display: 'flex',
@@ -82,7 +82,7 @@ const TopSellingTable = () => {
       fetchData();
     }, []);
 
-    if (!data || !data.users) {
+    if (!data || !data.students) {
       return <div>Loading...</div>; // or any other fallback UI
     }
 
@@ -117,17 +117,17 @@ const TopSellingTable = () => {
           </TableHead>
 
           <TableBody>
-            {data.users.map((user) => (
+            {data.students.map((user) => (
               <TableRow key={user.id} hover>
                 <TableCell colSpan={4} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
                   <Box display="flex" alignItems="center">
-                  {user.username} 
+                    {user.username} 
 
                   </Box>
                 </TableCell>
 
                 <TableCell align="left" colSpan={2} sx={{ px: 0, textTransform: 'capitalize' }}>
-                {user.email} 
+                  {user.email} 
                 </TableCell>
 
                 <TableCell sx={{ px: 0 }} align="left" colSpan={2}>
@@ -148,38 +148,6 @@ const TopSellingTable = () => {
   );
 };
 
-const productList = [
-  {
-    imgUrl: '/assets/images/products/headphone-2.jpg',
-    name: 'earphone',
-    price: 100,
-    available: 15,
-  },
-  {
-    imgUrl: '/assets/images/products/headphone-3.jpg',
-    name: 'earphone',
-    price: 1500,
-    available: 30,
-  },
-  {
-    imgUrl: '/assets/images/products/iphone-2.jpg',
-    name: 'iPhone x',
-    price: 1900,
-    available: 35,
-  },
-  {
-    imgUrl: '/assets/images/products/iphone-1.jpg',
-    name: 'iPhone x',
-    price: 100,
-    available: 0,
-  },
-  {
-    imgUrl: '/assets/images/products/headphone-3.jpg',
-    name: 'Head phone',
-    price: 1190,
-    available: 5,
-  },
-];
 
 export default TopSellingTable;
 
