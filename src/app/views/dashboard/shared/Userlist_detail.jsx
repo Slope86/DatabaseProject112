@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import { Paragraph } from 'app/components/Typography';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from 'axios.js';
 
 const CardHeader = styled(Box)(() => ({
   display: 'flex',
@@ -82,7 +82,7 @@ const TopSellingTable = () => {
       fetchData();
     }, []);
 
-    if (!data || !data.users) {
+    if (!data || !data.students) {
       return <div>Loading...</div>; // or any other fallback UI
     }
 
@@ -117,7 +117,7 @@ const TopSellingTable = () => {
           </TableHead>
 
           <TableBody>
-            {data.users.map((user) => (
+            {data.students.map((user) => (
               <TableRow key={user.id} hover>
                 <TableCell colSpan={4} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
                   <Box display="flex" alignItems="center">
