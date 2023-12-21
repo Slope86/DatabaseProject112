@@ -1,6 +1,6 @@
 import { Card, Grid, styled, useTheme } from '@mui/material';
 import { Fragment } from 'react';
-import TopSellingTable from './shared/TopSellingTable';
+import TopSellingTable from './shared/Userlist_detail';
 
 const ContentBox = styled('div')(({ theme }) => ({
   margin: '30px',

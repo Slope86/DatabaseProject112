@@ -15,6 +15,8 @@ import {
   useTheme,
 } from '@mui/material';
 import { Paragraph } from 'app/components/Typography';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const CardHeader = styled(Box)(() => ({
   display: 'flex',
@@ -61,10 +63,34 @@ const TopSellingTable = () => {
   const bgPrimary = palette.primary.main;
   const bgSecondary = palette.secondary.main;
 
+
+
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          // const response = await axios.get('http://140.120.14.106:5000/users');
+          const response = await axios.get('http://140.120.14.106:5000/api/admin/students');
+          setData(response.data);
+        } catch (err) {
+          setError(err);
+        }
+      };
+
+      fetchData();
+    }, []);
+
+    if (!data || !data.users) {
+      return <div>Loading...</div>; // or any other fallback UI
+    }
+
+
   return (
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
       <CardHeader>
-        <Title>top selling products</Title>
+        <Title>User</Title>
         <Select size="small" defaultValue="this_month">
           <MenuItem value="this_month">This Month</MenuItem>
           <MenuItem value="last_month">Last Month</MenuItem>
@@ -79,10 +105,10 @@ const TopSellingTable = () => {
                 Name
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={2}>
-                Revenue
+                Email
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={2}>
-                Stock Status
+                {/*Stock Status*/}
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={1}>
                 Action
@@ -91,29 +117,21 @@ const TopSellingTable = () => {
           </TableHead>
 
           <TableBody>
-            {productList.map((product, index) => (
-              <TableRow key={index} hover>
+            {data.users.map((user) => (
+              <TableRow key={user.id} hover>
                 <TableCell colSpan={4} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
                   <Box display="flex" alignItems="center">
-                    <Avatar src={product.imgUrl} />
-                    <Paragraph sx={{ m: 0, ml: 4 }}>{product.name}</Paragraph>
+                  {user.username} 
+
                   </Box>
                 </TableCell>
 
                 <TableCell align="left" colSpan={2} sx={{ px: 0, textTransform: 'capitalize' }}>
-                  ${product.price > 999 ? (product.price / 1000).toFixed(1) + 'k' : product.price}
+                {user.email} 
                 </TableCell>
 
                 <TableCell sx={{ px: 0 }} align="left" colSpan={2}>
-                  {product.available ? (
-                    product.available < 20 ? (
-                      <Small bgcolor={bgSecondary}>{product.available} available</Small>
-                    ) : (
-                      <Small bgcolor={bgPrimary}>in stock</Small>
-                    )
-                  ) : (
-                    <Small bgcolor={bgError}>out of stock</Small>
-                  )}
+
                 </TableCell>
 
                 <TableCell sx={{ px: 0 }} colSpan={1}>
@@ -164,3 +182,54 @@ const productList = [
 ];
 
 export default TopSellingTable;
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+
+// const ApiTestComponent = () => {
+//   const [data, setData] = useState(null);
+//   const [error, setError] = useState(null);
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const response = await axios.get('http://140.120.14.106:5000/users');
+//         setData(response.data);
+//       } catch (err) {
+//         setError(err);
+//       }
+//     };
+
+//     fetchData();
+//   }, []);
+
+//   return (
+//     <div>
+//       <h2>API Test</h2>
+//       {data ? (
+//         <div>
+//           <h3>Data Received:</h3>
+//           <ul>
+//             {data.users.map((user) => (
+//               <li key={user.id}>{user.username}</li>
+//             ))}
+//           </ul>
+//         </div>
+//       ) : (
+//         <p>Loading...</p>
+//       )}
+//       {error && <p>Error: {error.message}</p>}
+//     </div>
+//   );
+// };
+
+// export default ApiTestComponent;

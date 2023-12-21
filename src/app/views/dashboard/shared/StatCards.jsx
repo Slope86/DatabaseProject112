@@ -2,6 +2,7 @@ import { Box, Card, Grid, Icon, IconButton, styled, Tooltip } from '@mui/materia
 import { Small } from 'app/components/Typography';
 import { Link } from 'react-router-dom';
 import React from 'react';
+
 const StyledCard = styled(Card)(({ theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
@@ -30,15 +31,15 @@ const Heading = styled('h6')(({ theme }) => ({
 
 const StatCards = () => {
   const cardList = [
-    { name: 'New ', amount: 3050, icon: 'group' },
-    { name: 'This week Sales', amount: '$80,500', icon: 'attach_money' },
-    { name: 'Inventory Status', amount: '8.5% Stock Surplus', icon: 'store' },
-    { name: 'Orders to deliver', amount: '305 Orders', icon: 'shopping_cart' },
+    { name: 'UserList ', amount: 3050,path:"/Userlist/default",  icon: 'group' },
+    { name: 'This week Sales',path:"/Userlist/default", amount: '$80,500', icon: 'attach_money' },
+    { name: 'Inventory Status',path:"/Userlist/default", amount: '8.5% Stock Surplus', icon: 'store' },
+    { name: 'Orders to deliver',path:"/Userlist/default", amount: '305 Orders', icon: 'shopping_cart' },
   ];
 
   return (
     <Grid container spacing={3} sx={{ mb: '24px' }}>
-      {cardList.map((item, index) => (
+      {cardList.map((item, index, path) => (
         <Grid item xs={12} md={6} key={index}>
           <StyledCard elevation={6}>
             <ContentBox>
@@ -51,7 +52,7 @@ const StatCards = () => {
 
             <Tooltip title="View Details" placement="top">
               {/* 使用 Link 將組件連接到指定的路徑 */}
-              <Link to="/Course/default">
+              <Link to={item.path}>
                 <IconButton>
                   <Icon>arrow_right_alt</Icon>
                 </IconButton>

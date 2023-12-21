@@ -4,9 +4,9 @@ export const navigations = [
 
 
 
-  { name: 'Course Overview', path: '/dashboard/default', icon: 'dashboard' },
+  { name: 'Home', path: '/dashboard/default', icon: 'dashboard' },
 
-  { name: 'Course', path: '/Course/default', icon: 'dashboard' },
+  { name: 'Course', path: '/Course/default', icon: 'class' },
   { name: 'Userlist', path: '/Userlist/default', icon: 'dashboard' },
 
   { label: 'PAGES', type: 'label' },

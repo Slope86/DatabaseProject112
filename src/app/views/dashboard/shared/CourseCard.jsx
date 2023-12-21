@@ -35,6 +35,7 @@ const CourseCards = () => {
     { name: 'Student Count', amount: '$80,500', icon: 'group' },
     { name: 'Locations', amount: '8.5% Stock Surplus', icon: 'store' },
     { name: 'Course', amount: '305 Orders', icon: 'class' },
+    { name: 'Course', amount: '305 Orders', icon: 'class' },
   ];
 
   return (
