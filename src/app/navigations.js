@@ -3,10 +3,12 @@ export const navigations = [
   // { name: 'Home', iconText: 'SI', path: '/dashboard/default' },
 
 
+
   { name: 'Course Overview', path: '/dashboard/default', icon: 'dashboard' },
 
- { name: 'Course', path: '/Course/default', icon: 'dashboard' },
-  
+  { name: 'Course', path: '/Course/default', icon: 'dashboard' },
+  { name: 'Userlist', path: '/Userlist/default', icon: 'dashboard' },
+
   { label: 'PAGES', type: 'label' },
   {
     name: 'Session/Auth',
