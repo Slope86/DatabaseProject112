@@ -7,7 +7,11 @@ export const navigations = [
   { name: 'Home', path: '/dashboard/default', icon: 'dashboard' },
 
   { name: 'Course', path: '/Course/default', icon: 'class' },
-  { name: 'Userlist', path: '/Userlist/default', icon: 'dashboard' },
+  { name: 'Student', path: '/Userlist/default', icon: 'face' },
+    { name: 'Teacher', path: '/Teacher/default', icon: 'dashboard' },
+    { name: 'MemRegForm', path: '/MemberReg/default', icon: 'dashboard' },
+    
+
 
   { label: 'PAGES', type: 'label' },
   {
