@@ -64,7 +64,6 @@ const TopSellingTable = () => {
   const bgSecondary = palette.secondary.main;
 
 
-
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
 
@@ -90,7 +89,7 @@ const TopSellingTable = () => {
   return (
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
       <CardHeader>
-        <Title>User</Title>
+        <Title>Student</Title>
         <Select size="small" defaultValue="this_month">
           <MenuItem value="this_month">This Month</MenuItem>
           <MenuItem value="last_month">Last Month</MenuItem>

@@ -32,3 +32,4 @@ const Member_Reg_detail = () => {
 };
 
 export default Member_Reg_detail;
+

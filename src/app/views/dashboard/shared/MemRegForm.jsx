@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios.js';
 import { DatePicker } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -12,7 +14,6 @@ import {
   styled,
 } from "@mui/material";
 import { Span } from "app/components/Typography";
-import { useEffect, useState } from "react";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 
 const TextField = styled(TextValidator)(() => ({
@@ -20,54 +21,138 @@ const TextField = styled(TextValidator)(() => ({
   marginBottom: "16px",
 }));
 
-const Mem_Reg_Form = () => {
-  const [state, setState] = useState({ date: new Date() });
 
-  useEffect(() => {
-    ValidatorForm.addValidationRule("isPasswordMatch", (value) => {
-      if (value !== state.password) return false;
 
-      return true;
-    });
-    return () => ValidatorForm.removeValidationRule("isPasswordMatch");
-  }, [state.password]);
+// import axios from 'axios';
+const MemRegForm = () => {
+  const [students, setUsers] = useState([]);
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [newUser, setNewUser] = useState({
+    username: '',
+    email: '',
+    address: '',
+    phone: '',
+  });
 
-  const handleSubmit = (event) => {
-    // console.log("submitted");
-    // console.log(event);
+  // Function to fetch users from the API
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get('http://140.120.14.106:5000/api/admin/students');
+      setUsers(response.students);
+    } catch (error) {
+      console.error('Error fetching students:', error);
+    }
   };
 
-  const handleChange = (event) => {
-    event.persist();
-    setState({ ...state, [event.target.name]: event.target.value });
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          // const response = await axios.get('http://140.120.14.106:5000/users');
+          const response = await axios.get('http://140.120.14.106:5000/api/admin/students');
+          setData(response.data);
+        } catch (err) {
+          setError(err);
+        }
+      };
+
+      fetchData();
+    }, []);
+
+
+
+
+    if (!data || !data.students) {
+      return <div>Loading...</div>; // or any other fallback UI
+    }
+
+
+  // Function to handle deletion of a user
+  const deleteUser = async (userId) => {
+    try {
+      await axios.delete(`http://140.120.14.106:5000/api/admin/students/${userId}`);
+      fetchUsers(); // Refresh the user list after deleting a user
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
   };
 
-  const handleDateChange = (date) => setState({ ...state, date });
+const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post('http://140.120.14.106:5000/api/admin/students', newUser);
+      fetchUsers(); // Refresh the user list after creating a new user
+      setNewUser({
+    username: '',
+    email: '',
+    address: '',
+    phone: '',
+      });
+    } catch (error) {
+      console.error('Error creating user:', error);
+    }
+  };
 
-  const {
-    username,
-    firstName,
-    creditCard,
-    mobile,
-    password,
-    confirmPassword,
-    gender,
-    date,
-    email,
-    address,
-  } = state;
 
-  return (
+//   return (
+//     <div>
+//       <h1>User Management</h1>
+
+//       <h2>Users:</h2>
+//       <ul>
+//         {data.students.map((user) => (
+//           <li key={user.id}>
+//             {user.username} - {user.email} - {user.address} - {user.phone} {}
+//             <button onClick={() => deleteUser(user.id)}>Delete</button>
+//           </li>
+//         ))}
+//       </ul>
+
+//       <h2>Add New User:</h2>
+//       <form onSubmit={handleFormSubmit}>
+//         <input
+//           type="text"
+//           placeholder="Username"
+//           value={newUser.username}
+//           onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
+//         />
+//         <br />
+//         <input
+//           type="email"
+//           placeholder="Email"
+//           value={newUser.email}
+//           onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+//         />
+//         <br />
+//         <input
+//           type="address"
+//           placeholder="Address"
+//           value={newUser.address}
+//           onChange={(e) => setNewUser({ ...newUser, address: e.target.value })}
+//         />
+//         <input
+//           type="phone"
+//           placeholder="Phone"
+//           value={newUser.phone}
+//           onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })}
+//         />                
+//         <button type="submit">Add User</button>
+//       </form>
+//     </div>
+//   );
+// };
+    return (
     <div>
-      <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
+      <ValidatorForm onSubmit={handleFormSubmit} onError={() => null}>
         <Grid container spacing={12}   >
           <Grid item lg={9} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
             <TextField
               type="text"
               name="username"
               id="standard-basic"
-              value={username || ""}
-              onChange={handleChange}
+              placeholder="Username"
+              value={newUser.username}
+              onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
               errorMessages={["this field is required"]}
               label="Username (Min length 4, Max length 20)"
               validators={["required", "minStringLength: 4", "maxStringLength: 20"]}
@@ -75,10 +160,12 @@ const Mem_Reg_Form = () => {
 
             <TextField
               type="text"
-              name="Fullname"
+              name="fullname"
               label="Fullname"
-              onChange={handleChange}
-              value={firstName || ""}
+              placeholder="Fullname"
+              // onChange={handleChange}
+              value={newUser.fullname}
+              onChange={(e) => setNewUser({ ...newUser, fullname: e.target.value })}
               validators={["required"]}
               errorMessages={["this field is required"]}
             />
@@ -87,13 +174,14 @@ const Mem_Reg_Form = () => {
               type="email"
               name="email"
               label="Email"
-              value={email || ""}
-              onChange={handleChange}
+              placeholder="Email"              
+              value={newUser.email}
+              onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
               validators={["required", "isEmail"]}
               errorMessages={["this field is required", "email is not valid"]}
             />
 
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+{/*            <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
                 value={date}
                 onChange={handleDateChange}
@@ -106,26 +194,28 @@ const Mem_Reg_Form = () => {
                   />
                 )}
               />
-            </LocalizationProvider>
+            </LocalizationProvider>*/}
 
              <TextField
               type="text"
               name="address"
-              value={address || ""}
-              onChange={handleChange}
+              placeholder="Address" 
+              value={newUser.address}
+              onChange={(e) => setNewUser({ ...newUser, address: e.target.value })}
               errorMessages={["this field is required"]}
               label="Address"
               validators={["required"]}
             />
-          {/*</Grid>*/}
+          {/*</Grid>
 
           {/*<Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>*/}
             <TextField
               type="text"
-              name="mobile"
-              value={mobile || ""}
+              name="phone"
+              placeholder="Phone" 
+              value={newUser.phone}
               label="Mobile Nubmer"
-              onChange={handleChange}
+              onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })}
               validators={["required"]}
               errorMessages={["this field is required"]}
             />
@@ -133,21 +223,21 @@ const Mem_Reg_Form = () => {
               name="password"
               type="password"
               label="Password"
-              value={password || ""}
-              onChange={handleChange}
+              value={newUser.password}
+              onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
               validators={["required"]}
               errorMessages={["this field is required"]}
             />
-            <TextField
+ {/*           <TextField
               type="password"
               name="confirmPassword"
-              onChange={handleChange}
+              onChange={(e) => setNewUser({ ...newUser, confirmPassword: e.target.value })}
               label="Confirm Password"
-              value={confirmPassword || ""}
+              value={newUser.confirmPassword}
               validators={["required", "isPasswordMatch"]}
               errorMessages={["this field is required", "password didn't match"]}
-            />
-            <RadioGroup
+            />*/}
+{/*            <RadioGroup
               row
               name="gender"
               sx={{ mb: 2 }}
@@ -179,7 +269,7 @@ const Mem_Reg_Form = () => {
             <FormControlLabel
               control={<Checkbox />}
               label="I have read and agree to the terms of service."
-            />
+            />*/}
           </Grid>
         </Grid>
 
@@ -192,6 +282,4 @@ const Mem_Reg_Form = () => {
   );
 };
 
-export default Mem_Reg_Form;
-
-
+export default MemRegForm;
