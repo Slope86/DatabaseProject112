@@ -6,6 +6,8 @@ import RowCards from './shared/RowCards';
 import StatCards from './shared/StatCards';
 import StatCards2 from './shared/StatCards2';
 import TopSellingTable from './shared/TopSellingTable';
+import { useState } from 'react';
+import axios from 'axios.js'
 
 const ContentBox = styled('div')(({ theme }) => ({
   margin: '30px',
@@ -35,6 +37,20 @@ const H4 = styled('h4')(({ theme }) => ({
 const Analytics = () => {
   const { palette } = useTheme();
 
+  const [userProfile, setUserProfile] = useState(null);
+
+  const handleFetchProfile = async () => {
+    try {
+      const response = await axios.get('http://140.120.14.106:5000/api/auth/profile');
+      const { user } = response.data;
+      setUserProfile(user);
+    } catch (error) {
+      console.error(error);
+      setUserProfile(null);
+      // 可以在此处处理错误情况
+    }
+  };
+
   return (
     <Fragment>
       <ContentBox className="analytics">
@@ -62,6 +78,13 @@ const Analytics = () => {
             <Campaigns />
           </Grid>
         </Grid>
+        <button onClick={handleFetchProfile}>Fetch Profile</button>
+        {userProfile && (
+          <div>
+            <h2>User Profile:</h2>
+            <pre>{JSON.stringify(userProfile, null, 2)}</pre>
+          </div>
+        )}
       </ContentBox>
     </Fragment>
   );
