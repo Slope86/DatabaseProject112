@@ -1,6 +1,6 @@
 import { Card, Grid, styled, useTheme } from '@mui/material';
 import { Fragment } from 'react';
-import Studentlist from './shared/Userlist_detail';
+import CourseList from './shared/CourseList';
 
 const ContentBox = styled('div')(({ theme }) => ({
   margin: '30px',
@@ -21,15 +21,15 @@ const SubTitle = styled('span')(({ theme }) => ({
 
 
 
-const Userlist_detail = () => {
+const Course_list = () => {
   const { palette } = useTheme();
 
   return (
     <Fragment>
-      <ContentBox className="Userlist_detail">
+      <ContentBox className="CourseList">
         <Grid container spacing={3}>
           <Grid item lg={8} md={8} sm={12} xs={12}>
-            <Studentlist />
+            <CourseList />
           </Grid>
         </Grid>
       </ContentBox>
@@ -37,4 +37,4 @@ const Userlist_detail = () => {
   );
 };
 
-export default Userlist_detail;
+export default Course_list;

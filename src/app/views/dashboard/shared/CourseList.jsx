@@ -15,6 +15,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { Paragraph } from 'app/components/Typography';
+import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios.js';
 
@@ -57,45 +58,48 @@ const Small = styled('small')(({ bgcolor }) => ({
   boxShadow: '0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24)',
 }));
 
-const Studentlist = () => {
+const Courselist = () => {
   const { palette } = useTheme();
   const bgError = palette.error.main;
   const bgPrimary = palette.primary.main;
   const bgSecondary = palette.secondary.main;
 
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("all_categories");
 
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://140.120.14.106:5000/api/admin/courses');
+        setData(response.data);
+      } catch (err) {
+        setError(err);
+      }
+    };
 
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          // const response = await axios.get('http://140.120.14.106:5000/users');
-          const response = await axios.get('http://140.120.14.106:5000/api/admin/students');
-          setData(response.data);
-        } catch (err) {
-          setError(err);
-        }
-      };
+    fetchData();
+  }, []);
 
-      fetchData();
-    }, []);
+  if (!data || !data.courses) {
+    return <div>Loading...</div>; // or any other fallback UI
+  }
 
-    if (!data || !data.students) {
-      return <div>Loading...</div>; // or any other fallback UI
-    }
-
+  const filteredCourses = selectedCategory === "all_categories"
+    ? data.courses
+    : data.courses.filter(course => course.category === selectedCategory);
 
   return (
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
       <CardHeader>
-        <Title>Student</Title>
-        <Select size="small" defaultValue="this_month">
-          <MenuItem value="this_month">This Month</MenuItem>
-          <MenuItem value="last_month">Last Month</MenuItem>
+        <Title>Courses</Title>
+        <Select size="small" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+          <MenuItem value="all_categories">All</MenuItem>
+          {Array.from(new Set(data.courses.map(course => course.category))).map(category => (
+            <MenuItem key={category} value={category}>{category}</MenuItem>
+          ))}
         </Select>
       </CardHeader>
-
       <Box overflow="auto">
         <ProductTable>
           <TableHead>
@@ -104,10 +108,10 @@ const Studentlist = () => {
                 Name
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={2}>
-                Email
+                category
               </TableCell>
-              <TableCell sx={{ px: 0 }} colSpan={2}>
-                {/*Stock Status*/}
+              <TableCell sx={{ px: 0 }} colSpan={4}>
+                Description
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={1}>
                 Action
@@ -116,26 +120,25 @@ const Studentlist = () => {
           </TableHead>
 
           <TableBody>
-            {data.students.map((user) => (
-              <TableRow key={user.id} hover>
+            {filteredCourses.map((course) => (
+              <TableRow key={course.id} hover>
                 <TableCell colSpan={4} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
                   <Box display="flex" alignItems="center">
-                    {user.username} 
-
+                    {course.name}
                   </Box>
                 </TableCell>
 
                 <TableCell align="left" colSpan={2} sx={{ px: 0, textTransform: 'capitalize' }}>
-                  {user.email} 
+                  {course.category}
                 </TableCell>
 
-                <TableCell sx={{ px: 0 }} align="left" colSpan={2}>
-
+                <TableCell sx={{ px: 0 }} align="left" colSpan={4}>
+                  {course.description}
                 </TableCell>
 
                 <TableCell sx={{ px: 0 }} colSpan={1}>
-                  <IconButton>
-                    <Icon color="primary">edit</Icon>
+                  <IconButton component={Link} to={`/edit/${course.id}`} color="primary">
+                    <Icon>edit</Icon>
                   </IconButton>
                 </TableCell>
               </TableRow>
@@ -147,56 +150,6 @@ const Studentlist = () => {
   );
 };
 
-
-export default Studentlist;
-
+export default Courselist;
 
 
-
-
-
-
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-
-// const ApiTestComponent = () => {
-//   const [data, setData] = useState(null);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await axios.get('http://140.120.14.106:5000/users');
-//         setData(response.data);
-//       } catch (err) {
-//         setError(err);
-//       }
-//     };
-
-//     fetchData();
-//   }, []);
-
-//   return (
-//     <div>
-//       <h2>API Test</h2>
-//       {data ? (
-//         <div>
-//           <h3>Data Received:</h3>
-//           <ul>
-//             {data.users.map((user) => (
-//               <li key={user.id}>{user.username}</li>
-//             ))}
-//           </ul>
-//         </div>
-//       ) : (
-//         <p>Loading...</p>
-//       )}
-//       {error && <p>Error: {error.message}</p>}
-//     </div>
-//   );
-// };
-
-// export default ApiTestComponent;
