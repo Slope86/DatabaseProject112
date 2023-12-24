@@ -10,7 +10,8 @@ import NotFound from 'app/views/sessions/NotFound';
 import sessionRoutes from 'app/views/sessions/SessionRoutes';
 import { Navigate } from 'react-router-dom';
 import MatxLayout from './components/MatxLayout/MatxLayout';
-
+import CourselistRoutes from 'app/views/dashboard/CourselistRoutes';
+import EditCourse from 'app/views/dashboard/EditCourse'; // Import the EditCourse component
 
 const routes = [
   {
@@ -19,7 +20,18 @@ const routes = [
         <MatxLayout />
       </AuthGuard>
     ),
-    children: [...dashboardRoutes, ...chartsRoute, ...materialRoutes, ...CourseRoutes, ...UserlistRoutes, ...TeacherRoutes, ...Member_Reg_Routes],
+    children: [
+      ...dashboardRoutes,
+      ...chartsRoute,
+      ...materialRoutes,
+      ...CourseRoutes,
+      ...UserlistRoutes,
+      ...TeacherRoutes,
+      ...Member_Reg_Routes,
+      ...CourselistRoutes,
+      // Add the new route for EditCourse
+      { path: 'edit/:id', element: <EditCourse /> },
+    ],
   },
   ...sessionRoutes,
   { path: '/', element: <Navigate to="dashboard/default" /> },
@@ -27,6 +39,8 @@ const routes = [
   { path: '/', element: <Navigate to="Userlist/default" /> },  
   { path: '/', element: <Navigate to="Teacher/default" /> },  
   { path: '/', element: <Navigate to="MemberReg/default" /> }, 
+  { path: '/', element: <Navigate to="Courseslist/default" /> }, 
+  { path: 'edit/:id', element: <EditCourse /> },
   { path: '*', element: <NotFound /> },
 ];
 
