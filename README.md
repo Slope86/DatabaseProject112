@@ -2,6 +2,8 @@
 
 ## How to run the project
 
+1. Install and run frontend
+
 ```bash
 # Clone the project
 git clone --depth 1 https://github.com/Slope86/DatabaseProject112
@@ -13,6 +15,8 @@ yarn
 # Run the project
 yarn start
 ```
+
+2. Install and run backend from github repo [DatabaseProject112Backend](https://github.com/Slope86/DatabaseProject112Backend)
 
 ## Project Descriptions
 
