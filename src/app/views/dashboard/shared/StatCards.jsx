@@ -1,7 +1,9 @@
 import { Box, Card, Grid, Icon, IconButton, styled, Tooltip } from '@mui/material';
 import { Small } from 'app/components/Typography';
 import { Link } from 'react-router-dom';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios.js';
+
 
 const StyledCard = styled(Card)(({ theme }) => ({
   display: 'flex',
@@ -30,8 +32,31 @@ const Heading = styled('h6')(({ theme }) => ({
 }));
 
 const StatCards = () => {
+
+   const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          // const response = await axios.get('http://140.120.14.106:5000/users');
+          const response = await axios.get('http://140.120.14.106:5000/api/admin/teachers');
+          setData(response.data);
+        } catch (err) {
+          setError(err);
+        }
+      };
+
+      fetchData();
+    }, []);
+
+    if (!data || !data.teachers_count) {
+      return <div>Loading...</div>; // or any other fallback UI
+    }
+
   const cardList = [
-    { name: 'UserList ', amount: 3050,path:"/Userlist/default",  icon: 'group' },
+
+   { name: 'UserList', amount: 0, path: "/Userlist/default", icon: 'group' },
     { name: 'This week Sales',path:"/Userlist/default", amount: '$80,500', icon: 'attach_money' },
     { name: 'Inventory Status',path:"/Userlist/default", amount: '8.5% Stock Surplus', icon: 'store' },
     { name: 'Orders to deliver',path:"/Userlist/default", amount: '305 Orders', icon: 'shopping_cart' },
@@ -67,3 +92,75 @@ const StatCards = () => {
 
 export default StatCards;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState } from 'react';
+
+// const MyForm = () => {
+//   const [formData, setFormData] = useState({
+//     name: '',
+//     email: '',
+//     // 其他表單字段
+//   });
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData((prevData) => ({
+//       ...prevData,
+//       [name]: value,
+//     }));
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     // 在這裡呼叫後端API將表單數據送到資料庫
+//     sendDataToDatabase(formData);
+//   };
+
+//   const sendDataToDatabase = async (data) => {
+//     try {
+//       // 使用fetch或axios等工具向後端發送POST請求
+//       const response = await fetch('http://140.120.14.106:5000api/admin/teachers', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(data),
+//       });
+
+//       // 處理後端的回應，可能需要更新UI或顯示成功訊息
+//       const result = await response.json();
+//       console.log(result);
+//     } catch (error) {
+//       console.error('Error sending data to database:', error);
+//     }
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <label>
+//         Name:
+//         <input type="text" name="name" value={formData.name} onChange={handleChange} />
+//       </label>
+//       <label>
+//         Email:
+//         <input type="email" name="email" value={formData.email} onChange={handleChange} />
+//       </label>
+//       {/* 其他表單字段 */}
+//       <button type="submit">Submit</button>
+//     </form>
+//   );
+// };
+
+// export default MyForm;
