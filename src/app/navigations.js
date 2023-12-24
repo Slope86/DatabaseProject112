@@ -10,6 +10,7 @@ export const navigations = [
   { name: 'Student', path: '/Userlist/default', icon: 'face' },
     { name: 'Teacher', path: '/Teacher/default', icon: 'dashboard' },
     { name: 'MemRegForm', path: '/MemberReg/default', icon: 'dashboard' },
+    { name: 'Courseslist', path: '/Courseslist/default', icon: 'dashboard' },
     
 
 

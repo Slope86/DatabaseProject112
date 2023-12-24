@@ -83,11 +83,12 @@ const handleFormSubmit = async (e) => {
       await axios.post('http://140.120.14.106:5000/api/admin/students', newUser);
       fetchUsers(); // Refresh the user list after creating a new user
       setNewUser({
-    username: '',
-    email: '',
-    address: '',
-    phone: '',
+        username: '',
+        email: '',
+        address: '',
+        phone: '',
       });
+      fetchUsers();
     } catch (error) {
       console.error('Error creating user:', error);
     }

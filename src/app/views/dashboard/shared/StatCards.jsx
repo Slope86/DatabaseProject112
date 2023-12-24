@@ -34,32 +34,56 @@ const Heading = styled('h6')(({ theme }) => ({
 const StatCards = () => {
 
    const [data, setData] = useState(null);
+    const [data2, setData2] = useState(null);
     const [error, setError] = useState(null);
+    const [error2, setError2] = useState(null);
+    const [data3, setData3] = useState(null);
 
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          // const response = await axios.get('http://140.120.14.106:5000/users');
-          const response = await axios.get('http://140.120.14.106:5000/api/admin/teachers');
-          setData(response.data);
-        } catch (err) {
-          setError(err);
-        }
-      };
 
-      fetchData();
-    }, []);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://140.120.14.106:5000/api/admin/students');
+      setData(response.data);
+      
+      const response2 = await axios.get('http://140.120.14.106:5000/api/admin/teachers');
+      setData2(response2.data);  // Fix: Use response2.data instead of response2.data2
 
-    if (!data || !data.teachers_count) {
-      return <div>Loading...</div>; // or any other fallback UI
+     const response3 = await axios.get('http://140.120.14.106:5000/api/admin/courses');
+      setData3(response3.data); 
+
+    } catch (err) {
+      setError(err);
+      setError2(err);  // Fix: Handle errors for the second request
     }
+  };
+
+  fetchData();
+}, []);
+
+if (!data || !data.students_count || !data2 || !data2.teachers_count || !data3 || !data3.courses_count ) {
+  return <div>Loading...</div>; // or any other fallback UI
+}
+
+  // const fetchUsers = async () => {
+  //   try {
+  //     const response2 = await axios.get('http://140.120.14.106:5000/api/admin/students');
+  //     setData2(response2.data2);
+  //   } catch (error) {
+  //     console.error('Error fetching students:', error);
+  //   }
+  // };
+
+  // if (!data2 || !data2.students_count) {
+  //     return <div>Loading...</div>; // or any other fallback UI
+  //   }
 
   const cardList = [
 
-   { name: 'UserList', amount: 0, path: "/Userlist/default", icon: 'group' },
-    { name: 'This week Sales',path:"/Userlist/default", amount: '$80,500', icon: 'attach_money' },
-    { name: 'Inventory Status',path:"/Userlist/default", amount: '8.5% Stock Surplus', icon: 'store' },
-    { name: 'Orders to deliver',path:"/Userlist/default", amount: '305 Orders', icon: 'shopping_cart' },
+   { name: 'Student', amount:data.students_count , path: "/Userlist/default", icon: 'group' },
+    { name: 'Teacher',path:"/Teacher/default", amount: data2.teachers_count, icon: 'group' },
+
+    { name: 'Course',path:"/Courseslist/default", amount: data3.courses_count, icon: 'class' },
   ];
 
   return (

@@ -44,7 +44,7 @@ const SecondarySidebarContent = () => {
     <SidebarRoot width={'50px'} className="secondary-sidebar">
       <Span sx={{ m: 'auto' }}></Span>
       <MatxCustomizer />
-      <ShoppingCart />
+      {/*<ShoppingCart />*/}
 
       <ChatHead
         icon={
