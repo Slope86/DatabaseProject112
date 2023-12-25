@@ -11,6 +11,7 @@ import sessionRoutes from 'app/views/sessions/SessionRoutes';
 import { Navigate } from 'react-router-dom';
 import MatxLayout from './components/MatxLayout/MatxLayout';
 import CourselistRoutes from 'app/views/dashboard/CourselistRoutes';
+
 import EditCourse from 'app/views/dashboard/EditCourse'; 
 import ProfileRoutes from 'app/views/dashboard/ProfileRoutes'; // Import the EditCourse component
 
