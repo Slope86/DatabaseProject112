@@ -112,9 +112,9 @@ const Studentlist = () => {
               <TableCell sx={{ px: 0 }} colSpan={3}>
                 Mobile
               </TableCell>              
-              <TableCell sx={{ px: 0 }} colSpan={1}>
+{/*              <TableCell sx={{ px: 0 }} colSpan={1}>
                 Action
-              </TableCell>
+              </TableCell>*/}
             </TableRow>
           </TableHead>
 
@@ -140,11 +140,13 @@ const Studentlist = () => {
                   {user.phone}
                 </TableCell>
 
-                <TableCell sx={{ px: 0 }} colSpan={1}>
+     {/*              <TableCell sx={{ px: 0 }} colSpan={1}>
                   <IconButton>
                     <Icon color="primary">edit</Icon>
                   </IconButton>
-                </TableCell>
+                </TableCell>*/}
+
+                
               </TableRow>
             ))}
           </TableBody>

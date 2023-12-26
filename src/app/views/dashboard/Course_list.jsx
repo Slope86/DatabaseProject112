@@ -28,7 +28,7 @@ const Course_list = () => {
     <Fragment>
       <ContentBox className="CourseList">
         <Grid container spacing={3}>
-          <Grid item lg={8} md={8} sm={12} xs={12}>
+          <Grid item lg={10} md={8} sm={12} xs={12}>
             <CourseList />
           </Grid>
         </Grid>

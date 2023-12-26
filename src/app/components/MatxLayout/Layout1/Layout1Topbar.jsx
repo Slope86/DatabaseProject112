@@ -11,6 +11,10 @@ import { Link } from 'react-router-dom';
 import { Span } from '../../../components/Typography';
 import NotificationBar from '../../NotificationBar/NotificationBar';
 import ShoppingCart from '../../ShoppingCart';
+import  { useState, useEffect } from 'react';
+import axios from 'axios.js';
+
+
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.text.primary,
@@ -76,6 +80,37 @@ const Layout1Topbar = () => {
   const { logout, user } = useAuth();
   const isMdScreen = useMediaQuery(theme.breakpoints.down('md'));
 
+
+
+
+  const [data, setData] = useState(null);
+  const [newUser, setNewUser] = useState({
+    // username: '',
+    // email: '',
+    // address: '',
+    // phone: '',
+    // gender: '',
+  });
+ const [updateSuccess, setUpdateSuccess] = useState(false); 
+
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('http://140.120.14.106:5000/api/auth/profile');
+        setData(response.data);
+        setNewUser(response.data.user);  // Set initial form values
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+
+
+
+
+
   const updateSidebarMode = (sidebarSettings) => {
     updateSettings({
       layout1Settings: { leftSidebar: { ...sidebarSettings } },
@@ -92,6 +127,11 @@ const Layout1Topbar = () => {
     }
     updateSidebarMode({ mode });
   };
+
+
+    if (!data || !data.user) {
+    return <div>Loading...</div>; // or any other fallback UI
+  }
 
   return (
     <TopbarRoot>
@@ -130,7 +170,7 @@ const Layout1Topbar = () => {
               <UserMenu>
                 <Hidden xsDown>
                   <Span>
-                    Hi <strong>{user.name}</strong>
+                    Hi <strong>{data.user.name}</strong>
                   </Span>
                 </Hidden>
                 <Avatar src={user.avatar} sx={{ cursor: 'pointer' }} />

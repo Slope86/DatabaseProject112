@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import Campaigns from './shared/Campaigns';
 import DoughnutChart from './shared/Doughnut';
 import RowCards from './shared/RowCards';
-import StatCards from './shared/StatCards';
+import Course from './shared/Course';
 import StatCards2 from './shared/StatCards2';
 import Courselist from './shared/CourseList';
 // import TopSellingTable from './shared/TopSellingTable';
@@ -41,7 +41,7 @@ const Course_detail = () => {
       <ContentBox className="Course_detail">
         <Grid container spacing={3}>
           <Grid item lg={8} md={8} sm={12} xs={12}>
-            <StatCards />
+            <Course />
 
             {/*<TopSellingTable />*/}
             {/*<StatCards2 />*/}

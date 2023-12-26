@@ -83,7 +83,7 @@ if (!data || !data.students_count || !data2 || !data2.teachers_count || !data3 |
    { name: 'Student', amount:data.students_count , path: "/Userlist/default", icon: 'group' },
     { name: 'Teacher',path:"/Teacher/default", amount: data2.teachers_count, icon: 'group' },
 
-    { name: 'Course',path:"/Courseslist/default", amount: data3.courses_count, icon: 'class' },
+    { name: 'Course',path:"/Course/default", amount: data3.courses_count, icon: 'class' },
   ];
 
   return (

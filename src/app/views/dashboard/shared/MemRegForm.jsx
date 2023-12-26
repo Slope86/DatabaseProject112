@@ -210,16 +210,21 @@ const handleFormSubmit = async (e) => {
           {/*</Grid>
 
           {/*<Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>*/}
-            <TextField
-              type="text"
-              name="phone"
-              placeholder="Phone" 
-              value={newUser.phone}
-              label="Mobile Nubmer"
-              onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })}
-              validators={["required"]}
-              errorMessages={["this field is required"]}
-            />
+          <TextField
+            type="text"
+            name="phone"
+            placeholder="Phone"
+            value={newUser.phone}
+            label="Mobile Number"
+            onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })}
+            validators={["required", "isNumber"]}
+            errorMessages={["This field is required", "Please enter a valid number"]}
+            InputProps={{
+              inputProps: {
+                inputMode: "numeric",
+              },
+            }}
+          />
             <TextField
               name="password"
               type="password"

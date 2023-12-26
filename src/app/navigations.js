@@ -6,66 +6,67 @@ export const navigations = [
 
   { name: 'Home', path: '/dashboard/default', icon: 'dashboard' },
 
-  { name: 'Course', path: '/Course/default', icon: 'class' },
   { name: 'Student', path: '/Userlist/default', icon: 'face' },
-    { name: 'Teacher', path: '/Teacher/default', icon: 'dashboard' },
-    { name: 'MemRegForm', path: '/MemberReg/default', icon: 'dashboard' },
-    { name: 'Courseslist', path: '/Courseslist/default', icon: 'dashboard' },
+    { name: 'Teacher', path: '/Teacher/default', icon: 'face' },
+  { name: 'Course', path: '/Course/default', icon: 'class' },
+    { name: 'MemRegForm', path: '/MemberReg/default', icon: 'description' },
+    { name: 'Modify Course', path: '/Courseslist/default', icon: 'build' },
+    // { name: 'CategoryPage', path: '/CategoryPage/default', icon: 'dashboard' },
     
 
 
-  { label: 'PAGES', type: 'label' },
-  {
-    name: 'Session/Auth',
-    icon: 'security',
-    children: [
-      { name: 'Sign in', iconText: 'SI', path: '/session/signin' },
-      { name: 'Sign up', iconText: 'SU', path: '/session/signup' },
-      { name: 'Forgot Password', iconText: 'FP', path: '/session/forgot-password' },
-      { name: 'Error', iconText: '404', path: '/session/404' },
-    ],
-  },
+  // { label: 'PAGES', type: 'label' },
+  // {
+  //   name: 'Session/Auth',
+  //   icon: 'security',
+  //   children: [
+  //     { name: 'Sign in', iconText: 'SI', path: '/session/signin' },
+  //     { name: 'Sign up', iconText: 'SU', path: '/session/signup' },
+  //     { name: 'Forgot Password', iconText: 'FP', path: '/session/forgot-password' },
+  //     { name: 'Error', iconText: '404', path: '/session/404' },
+  //   ],
+  // },
 
-  {
-    name: 'Course search',
-    icon: 'list',
-    children: [
-      { name: 'Course', iconText: 'SI', path: '' },
-    ],
-  },
+  // {
+  //   name: 'Course search',
+  //   icon: 'list',
+  //   children: [
+  //     { name: 'Course', iconText: 'SI', path: '' },
+  //   ],
+  // },
 
-  { label: 'Components', type: 'label' },
+  // { label: 'Components', type: 'label' },
 
-  {
-    name: 'Components',
-    icon: 'favorite',
-    badge: { value: '30+', color: 'secondary' },
-    children: [
-      { name: 'Auto Complete', path: '/material/autocomplete', iconText: 'A' },
-      { name: 'Buttons', path: '/material/buttons', iconText: 'B' },
-      { name: 'Checkbox', path: '/material/checkbox', iconText: 'C' },
-      { name: 'Dialog', path: '/material/dialog', iconText: 'D' },
-      { name: 'Expansion Panel', path: '/material/expansion-panel', iconText: 'E' },
-      { name: 'Form', path: '/material/form', iconText: 'F' },
-      { name: 'Icons', path: '/material/icons', iconText: 'I' },
-      { name: 'Menu', path: '/material/menu', iconText: 'M' },
-      { name: 'Progress', path: '/material/progress', iconText: 'P' },
-      { name: 'Radio', path: '/material/radio', iconText: 'R' },
-      { name: 'Switch', path: '/material/switch', iconText: 'S' },
-      { name: 'Slider', path: '/material/slider', iconText: 'S' },
-      { name: 'Snackbar', path: '/material/snackbar', iconText: 'S' },
-      { name: 'Table', path: '/material/table', iconText: 'T' },
-    ],
-  },
-  {
-    name: 'Charts',
-    icon: 'trending_up',
-    children: [{ name: 'Echarts', path: '/charts/echarts', iconText: 'E' }],
-  },
-  {
-    name: 'Documentation',
-    icon: 'launch',
-    type: 'extLink',
-    path: 'http://demos.ui-lib.com/matx-react-doc/',
-  },
+  // {
+  //   name: 'Components',
+  //   icon: 'favorite',
+  //   badge: { value: '30+', color: 'secondary' },
+  //   children: [
+  //     { name: 'Auto Complete', path: '/material/autocomplete', iconText: 'A' },
+  //     { name: 'Buttons', path: '/material/buttons', iconText: 'B' },
+  //     { name: 'Checkbox', path: '/material/checkbox', iconText: 'C' },
+  //     { name: 'Dialog', path: '/material/dialog', iconText: 'D' },
+  //     { name: 'Expansion Panel', path: '/material/expansion-panel', iconText: 'E' },
+  //     { name: 'Form', path: '/material/form', iconText: 'F' },
+  //     { name: 'Icons', path: '/material/icons', iconText: 'I' },
+  //     { name: 'Menu', path: '/material/menu', iconText: 'M' },
+  //     { name: 'Progress', path: '/material/progress', iconText: 'P' },
+  //     { name: 'Radio', path: '/material/radio', iconText: 'R' },
+  //     { name: 'Switch', path: '/material/switch', iconText: 'S' },
+  //     { name: 'Slider', path: '/material/slider', iconText: 'S' },
+  //     { name: 'Snackbar', path: '/material/snackbar', iconText: 'S' },
+  //     { name: 'Table', path: '/material/table', iconText: 'T' },
+  //   ],
+  // },
+  // {
+  //   name: 'Charts',
+  //   icon: 'trending_up',
+  //   children: [{ name: 'Echarts', path: '/charts/echarts', iconText: 'E' }],
+  // },
+  // {
+  //   name: 'Documentation',
+  //   icon: 'launch',
+  //   type: 'extLink',
+  //   path: 'http://demos.ui-lib.com/matx-react-doc/',
+  // },
 ];
