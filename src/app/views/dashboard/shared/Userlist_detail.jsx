@@ -90,10 +90,10 @@ const Studentlist = () => {
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
       <CardHeader>
         <Title>Student</Title>
-        <Select size="small" defaultValue="this_month">
+{/*        <Select size="small" defaultValue="this_month">
           <MenuItem value="this_month">This Month</MenuItem>
           <MenuItem value="last_month">Last Month</MenuItem>
-        </Select>
+        </Select>*/}
       </CardHeader>
 
       <Box overflow="auto">
@@ -103,15 +103,18 @@ const Studentlist = () => {
               <TableCell sx={{ px: 3 }} colSpan={4}>
                 Name
               </TableCell>
-              <TableCell sx={{ px: 0 }} colSpan={2}>
+              <TableCell sx={{ px: 0 }} colSpan={5}>
                 Email
               </TableCell>
-              <TableCell sx={{ px: 0 }} colSpan={2}>
-                {/*Stock Status*/}
+              <TableCell sx={{ px: 0 }} colSpan={10}>
+                Address
               </TableCell>
-              <TableCell sx={{ px: 0 }} colSpan={1}>
+              <TableCell sx={{ px: 0 }} colSpan={3}>
+                Mobile
+              </TableCell>              
+{/*              <TableCell sx={{ px: 0 }} colSpan={1}>
                 Action
-              </TableCell>
+              </TableCell>*/}
             </TableRow>
           </TableHead>
 
@@ -125,19 +128,25 @@ const Studentlist = () => {
                   </Box>
                 </TableCell>
 
-                <TableCell align="left" colSpan={2} sx={{ px: 0, textTransform: 'capitalize' }}>
+                <TableCell align="left" colSpan={5} sx={{ px: 0, textTransform: 'capitalize' }}>
                   {user.email} 
                 </TableCell>
 
-                <TableCell sx={{ px: 0 }} align="left" colSpan={2}>
-
+                <TableCell sx={{ px: 1 }} align="left" colSpan={10}>
+                  {user.address}
                 </TableCell>
 
-                <TableCell sx={{ px: 0 }} colSpan={1}>
+                <TableCell sx={{ px: 0 }} align="left" colSpan={3}>
+                  {user.phone}
+                </TableCell>
+
+     {/*              <TableCell sx={{ px: 0 }} colSpan={1}>
                   <IconButton>
                     <Icon color="primary">edit</Icon>
                   </IconButton>
-                </TableCell>
+                </TableCell>*/}
+
+                
               </TableRow>
             ))}
           </TableBody>

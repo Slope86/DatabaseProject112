@@ -68,7 +68,8 @@ const Courselist = () => {
   const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("all_categories");
 
-  useEffect(() => {
+
+
     const fetchData = async () => {
       try {
         const response = await axios.get('http://140.120.14.106:5000/api/admin/courses');
@@ -77,7 +78,7 @@ const Courselist = () => {
         setError(err);
       }
     };
-
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -89,10 +90,39 @@ const Courselist = () => {
     ? data.courses
     : data.courses.filter(course => course.category === selectedCategory);
 
+  const deleteUser = async (courseId) => {
+    try {
+      await axios.delete(`http://140.120.14.106:5000/api/admin/courses/${courseId}`);
+      fetchData(); // Refresh the user list after deleting a user
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
+
+
+// const handleDeleteCourse = async (courseId) => {
+//   try {
+//     // 使用您的 API 端點和方法進行刪除
+//     await axios.delete(`http://140.120.14.106:5000/api/admin/courses`, {
+//       headers: {
+//         'Content-Type': 'application/json', // 設置 Content-Type 為 'application/json'
+//       },
+//     });
+
+//     // 更新狀態以重新渲染
+//     const updatedCourses = data.courses.filter((course) => course.id !== courseId);
+//     setData({ ...data, courses: updatedCourses });
+//     fetchData();
+//   } catch (error) {
+//     console.error('Error deleting course:', error);
+//     // 處理錯誤，例如顯示提示或記錄錯誤
+//   }
+// };;
+
   return (
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
       <CardHeader>
-        <Title>Courses</Title>
+        <Title>Modify Courses</Title>
         <Select size="small" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
           <MenuItem value="all_categories">All</MenuItem>
           {Array.from(new Set(data.courses.map(course => course.category))).map(category => (
@@ -107,15 +137,16 @@ const Courselist = () => {
               <TableCell sx={{ px: 3 }} colSpan={4}>
                 Name
               </TableCell>
-              <TableCell sx={{ px: 0 }} colSpan={2}>
-                category
+              <TableCell sx={{ px: 0 }} colSpan={3}>
+                Category
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={4}>
                 Description
               </TableCell>
-              <TableCell sx={{ px: 0 }} colSpan={1}>
-                Action
+              <TableCell sx={{ px: 1 }} colSpan={1}>
+                Edit
               </TableCell>
+              
             </TableRow>
           </TableHead>
 
@@ -128,7 +159,7 @@ const Courselist = () => {
                   </Box>
                 </TableCell>
 
-                <TableCell align="left" colSpan={2} sx={{ px: 0, textTransform: 'capitalize' }}>
+                <TableCell align="left" colSpan={3} sx={{ px: 0, textTransform: 'capitalize' }}>
                   {course.category}
                 </TableCell>
 
@@ -136,10 +167,15 @@ const Courselist = () => {
                   {course.description}
                 </TableCell>
 
-                <TableCell sx={{ px: 0 }} colSpan={1}>
+                <TableCell sx={{ px: 1 }} colSpan={1}>
                   <IconButton component={Link} to={`/edit/${course.id}`} color="primary">
                     <Icon>edit</Icon>
                   </IconButton>
+
+                  <IconButton onClick={() => deleteUser(course.id)} color="error">
+                    <Icon>delete</Icon>
+                  </IconButton>
+
                 </TableCell>
               </TableRow>
             ))}
