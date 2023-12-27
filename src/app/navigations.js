@@ -8,9 +8,10 @@ export const navigations = [
 
   { name: 'Student', path: '/Userlist/default', icon: 'face' },
     { name: 'Teacher', path: '/Teacher/default', icon: 'face' },
-  { name: 'Course', path: '/Course/default', icon: 'class' },
-    { name: 'MemRegForm', path: '/MemberReg/default', icon: 'description' },
+  { name: 'Category', path: '/Course/default', icon: 'class' },
+    { name: 'Course Enter', path: '/MemberReg/default', icon: 'description' },
     { name: 'Modify Course', path: '/Courseslist/default', icon: 'build' },
+     { name: 'Search', path: '/Search/default', icon: 'build' },
     // { name: 'CategoryPage', path: '/CategoryPage/default', icon: 'dashboard' },
     
 

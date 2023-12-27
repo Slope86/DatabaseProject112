@@ -144,19 +144,22 @@ const ProfileDetail = () => {
               fullWidth
             />
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              type="text"
-              name="phone"
-              placeholder="Phone"
-              label="Mobile Number"
-              value={newUser.phone ||""}
-              onChange={(e) => handleInputChange('phone', e.target.value)}
-              validators={['required']}
-              errorMessages={['This field is required']}
-              fullWidth
-            />
-          </Grid>
+            <Grid item xs={12}>
+              <TextField
+                type="text"
+                name="phone"
+                placeholder="Phone"
+                label="Mobile Number"
+                value={newUser.phone || ""}
+                onChange={(e) => handleInputChange('phone', e.target.value)}
+                validators={["required", "isNumber"]}
+                errorMessages={["This field is required", "Please enter a valid number"]}
+                fullWidth
+                inputProps={{
+                  inputMode: 'numeric', // 设置为 numeric 
+                }}
+              />
+            </Grid>
           <Grid item xs={12}>
             <TextField
               type="text"

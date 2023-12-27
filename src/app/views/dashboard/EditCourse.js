@@ -50,7 +50,7 @@ const EditCourse = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://140.120.14.106:5000/api/admin/courses');
+      const response = await axios.get('http://140.120.14.106:5000/api/admin/modifycourses');
       setData(response.data);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -90,7 +90,7 @@ const EditCourse = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`http://140.120.14.106:5000/api/admin/courses`, items); // 使用 put 請求
+      await axios.patch(`http://140.120.14.106:5000/api/admin/modifycourses`, items); // 使用 put 請求
       // Update the item in the local state
       setData(prevData => ({
         ...prevData,

@@ -23,7 +23,7 @@ const Teacher_list = () => {
   return (
     <Container>
       <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: "Home", path: "/dashboard/default" }, { name: "Table" }]} />
+        <Breadcrumb routeSegments={[{ name: "Home", path: "/dashboard/default" }, { name: "Teacher" }]} />
       </Box>
 
       <SimpleCard title=" Teacher ">
