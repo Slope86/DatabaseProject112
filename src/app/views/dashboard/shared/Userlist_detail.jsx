@@ -57,155 +57,231 @@ const Small = styled('small')(({ bgcolor }) => ({
   boxShadow: '0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24)',
 }));
 
+
+
+
+
+
+
+
+
+
+// const Studentlist = () => {
+//   const { palette } = useTheme();
+//   const bgError = palette.error.main;
+//   const bgPrimary = palette.primary.main;
+//   const bgSecondary = palette.secondary.main;
+
+
+//     const [data, setData] = useState(null);
+//     const [error, setError] = useState(null);
+
+//     useEffect(() => {
+//       const fetchData = async () => {
+//         try {
+//           // const response = await axios.get('http://140.120.14.106:5000/users');
+//           const response = await axios.get('http://140.120.14.106:5000/api/admin/students');
+//           setData(response.data);
+//         } catch (err) {
+//           setError(err);
+//         }
+//       };
+
+//       fetchData();
+//     }, []);
+
+//     if (!data || !data.students) {
+//       return <div>Loading...</div>; // or any other fallback UI
+//     }
+
+
+//   return (
+//     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
+//       <CardHeader>
+//         <Title>Student</Title>
+// {/*        <Select size="small" defaultValue="this_month">
+//           <MenuItem value="this_month">This Month</MenuItem>
+//           <MenuItem value="last_month">Last Month</MenuItem>
+//         </Select>*/}
+//       </CardHeader>
+
+//       <Box overflow="auto">
+//         <ProductTable>
+//           <TableHead>
+//             <TableRow>
+//               <TableCell sx={{ px: 3 }} colSpan={4}>
+//                 Name
+//               </TableCell>
+//               <TableCell sx={{ px: 0 }} colSpan={5}>
+//                 Email
+//               </TableCell>
+//               <TableCell sx={{ px: 0 }} colSpan={10}>
+//                 Address
+//               </TableCell>
+//               <TableCell sx={{ px: 0 }} colSpan={3}>
+//                 Mobile
+//               </TableCell>              
+// {/*              <TableCell sx={{ px: 0 }} colSpan={1}>
+//                 Action
+//               </TableCell>*/}
+//             </TableRow>
+//           </TableHead>
+
+//           <TableBody>
+//             {data.students.map((user) => (
+//               <TableRow key={user.id} hover>
+//                 <TableCell colSpan={4} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
+//                   <Box display="flex" alignItems="center">
+//                     {user.username} 
+
+//                   </Box>
+//                 </TableCell>
+
+//                 <TableCell align="left" colSpan={5} sx={{ px: 0, textTransform: 'capitalize' }}>
+//                   {user.email} 
+//                 </TableCell>
+
+//                 <TableCell sx={{ px: 1 }} align="left" colSpan={10}>
+//                   {user.address}
+//                 </TableCell>
+
+//                 <TableCell sx={{ px: 0 }} align="left" colSpan={3}>
+//                   {user.phone}
+//                 </TableCell>
+
+//      {/*              <TableCell sx={{ px: 0 }} colSpan={1}>
+//                   <IconButton>
+//                     <Icon color="primary">edit</Icon>
+//                   </IconButton>
+//                 </TableCell>*/}
+
+                
+//               </TableRow>
+//             ))}
+//           </TableBody>
+//         </ProductTable>
+//       </Box>
+//     </Card>
+//   );
+// };
+
+
+// export default Studentlist;
+
+
+
+
+
+
+
+
+
 const Studentlist = () => {
   const { palette } = useTheme();
   const bgError = palette.error.main;
   const bgPrimary = palette.primary.main;
   const bgSecondary = palette.secondary.main;
 
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [coursesData, setCoursesData] = useState(null);
 
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const studentsResponse = await axios.get('http://140.120.14.106:5000/api/admin/students');
+        setData(studentsResponse.data.students);
 
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          // const response = await axios.get('http://140.120.14.106:5000/users');
-          const response = await axios.get('http://140.120.14.106:5000/api/admin/students');
-          setData(response.data);
-        } catch (err) {
-          setError(err);
-        }
-      };
+        // Fetch all courses data
+        const coursesResponse = await axios.get('http://140.120.14.106:5000/api/admin/courses');
+        setCoursesData(coursesResponse.data.courses);
+      } catch (err) {
+        setError(err);
+      }
+    };
 
-      fetchData();
-    }, []);
+    fetchData();
+  }, []);
 
-    if (!data || !data.students) {
-      return <div>Loading...</div>; // or any other fallback UI
-    }
+  if (!data || !coursesData) {
+    return <div>Loading...</div>; // or any other fallback UI
+  }
 
 
   return (
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
       <CardHeader>
         <Title>Student</Title>
-{/*        <Select size="small" defaultValue="this_month">
-          <MenuItem value="this_month">This Month</MenuItem>
-          <MenuItem value="last_month">Last Month</MenuItem>
-        </Select>*/}
       </CardHeader>
 
       <Box overflow="auto">
         <ProductTable>
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ px: 3 }} colSpan={4}>
-                Name
-              </TableCell>
-              <TableCell sx={{ px: 0 }} colSpan={5}>
-                Email
-              </TableCell>
-              <TableCell sx={{ px: 0 }} colSpan={10}>
-                Address
-              </TableCell>
-              <TableCell sx={{ px: 0 }} colSpan={3}>
-                Mobile
-              </TableCell>              
-{/*              <TableCell sx={{ px: 0 }} colSpan={1}>
-                Action
-              </TableCell>*/}
-            </TableRow>
-          </TableHead>
+  <TableHead>
+  <TableRow>
+    <TableCell sx={{ px: 3 }} colSpan={2}>
+      Username
+    </TableCell>
+    <TableCell sx={{ px: 0 }} colSpan={2}>
+      FullName
+    </TableCell>
+    <TableCell sx={{ px: 0 }} colSpan={2}>
+      Email
+    </TableCell>
+    <TableCell sx={{ px: 0 }} colSpan={4}>
+      Address
+    </TableCell>
+    <TableCell sx={{ px: 0 }} colSpan={2}>
+      Mobile
+    </TableCell>
+    <TableCell sx={{ px: 2 }} colSpan={4}>
+      Courses
+    </TableCell>
+  </TableRow>
+</TableHead>
 
-          <TableBody>
-            {data.students.map((user) => (
-              <TableRow key={user.id} hover>
-                <TableCell colSpan={4} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
-                  <Box display="flex" alignItems="center">
-                    {user.username} 
+<TableBody>
+  {data.map((user) => (
+    <TableRow key={user.id} hover>
+      <TableCell colSpan={2} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
+        <Box display="flex" alignItems="center">
+          {user.username}
+        </Box>
+      </TableCell>
 
-                  </Box>
-                </TableCell>
+      <TableCell align="left" colSpan={2} sx={{ px: 0, textTransform: 'capitalize' }}>
+        {user.fullname}
+      </TableCell>
 
-                <TableCell align="left" colSpan={5} sx={{ px: 0, textTransform: 'capitalize' }}>
-                  {user.email} 
-                </TableCell>
+      <TableCell align="left" colSpan={2} sx={{ px: 0, textTransform: 'capitalize' }}>
+        {user.email}
+      </TableCell>
 
-                <TableCell sx={{ px: 1 }} align="left" colSpan={10}>
-                  {user.address}
-                </TableCell>
+      <TableCell sx={{ px: 0 }} align="left" colSpan={4}>
+        {user.address}
+      </TableCell>
 
-                <TableCell sx={{ px: 0 }} align="left" colSpan={3}>
-                  {user.phone}
-                </TableCell>
+      <TableCell sx={{ px: 0 }} align="left" colSpan={2}>
+        {user.phone}
+      </TableCell>
 
-     {/*              <TableCell sx={{ px: 0 }} colSpan={1}>
-                  <IconButton>
-                    <Icon color="primary">edit</Icon>
-                  </IconButton>
-                </TableCell>*/}
-
-                
-              </TableRow>
+      <TableCell sx={{ px: 0 }} colSpan={4}>
+        <ul>
+          {coursesData
+            .filter((course) => course.entered_students.some((student) => student.id === user.id))
+            .map((course) => (
+              <li key={course.id}>
+                <Paragraph variant="caption">{course.name}</Paragraph>
+              </li>
             ))}
-          </TableBody>
+        </ul>
+      </TableCell>
+    </TableRow>
+  ))}
+</TableBody>
         </ProductTable>
       </Box>
     </Card>
   );
 };
 
-
 export default Studentlist;
-
-
-
-
-
-
-
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-
-// const ApiTestComponent = () => {
-//   const [data, setData] = useState(null);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await axios.get('http://140.120.14.106:5000/users');
-//         setData(response.data);
-//       } catch (err) {
-//         setError(err);
-//       }
-//     };
-
-//     fetchData();
-//   }, []);
-
-//   return (
-//     <div>
-//       <h2>API Test</h2>
-//       {data ? (
-//         <div>
-//           <h3>Data Received:</h3>
-//           <ul>
-//             {data.users.map((user) => (
-//               <li key={user.id}>{user.username}</li>
-//             ))}
-//           </ul>
-//         </div>
-//       ) : (
-//         <p>Loading...</p>
-//       )}
-//       {error && <p>Error: {error.message}</p>}
-//     </div>
-//   );
-// };
-
-// export default ApiTestComponent;

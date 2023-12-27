@@ -72,7 +72,7 @@ const Courselist = () => {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://140.120.14.106:5000/api/admin/courses');
+        const response = await axios.get('http://140.120.14.106:5000/api/admin/modifycourses');
         setData(response.data);
       } catch (err) {
         setError(err);
@@ -83,7 +83,7 @@ const Courselist = () => {
   }, []);
 
   if (!data || !data.courses) {
-    return <div>Loading...</div>; // or any other fallback UI
+    return <div>Unauthorized</div>; // or any other fallback UI
   }
 
   const filteredCourses = selectedCategory === "all_categories"

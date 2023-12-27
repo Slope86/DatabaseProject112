@@ -75,23 +75,25 @@ return (
       <StyledTable>
         <TableHead>
           <TableRow>
-            <TableCell align="left">Name</TableCell>
-            <TableCell colSpan={2} align="left">Email</TableCell>
-            <TableCell align="center"></TableCell>
-            <TableCell align="center"></TableCell>
-            <TableCell align="center"></TableCell>
+            <TableCell align="left" style={{ width: '80px' }}>Name</TableCell>
+            <TableCell align="left" style={{ width: '100px' }}>Email</TableCell>
+            <TableCell align="left" style={{ width: '300px' }}>Courses Taught</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {data.teachers
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((user) => (
-              <TableRow key={user.id}>
-                <TableCell align="left">{user.username}</TableCell>
-                <TableCell colSpan={2} align="left">{user.email}</TableCell>
-                <TableCell align="center"></TableCell>
-                <TableCell align="center"></TableCell>
-                <TableCell align="center"></TableCell>
+            .map((teacher) => (
+              <TableRow key={teacher.id}>
+                <TableCell align="left">{teacher.username}</TableCell>
+                <TableCell align="left">{teacher.email}</TableCell>
+                <TableCell align="left">
+                  <ul>
+                    {teacher.courses_taught.map((course) => (
+                      <li key={course.id} style={{ fontSize: '16px' }}>{course.name}</li>
+                    ))}
+                  </ul>
+                </TableCell>
               </TableRow>
             ))}
         </TableBody>
@@ -112,6 +114,5 @@ return (
     </Box>
   );
 };
-
 
 export default Teacher_detail;

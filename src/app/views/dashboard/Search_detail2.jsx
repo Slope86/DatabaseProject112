@@ -1,6 +1,6 @@
 import { Card, Grid, styled, useTheme,Box } from '@mui/material';
 import { Fragment } from 'react';
-import CategoryPage2 from './shared/CategoryPage';
+import Search_detail from './Search_detail';
 import CourseCard from './shared/CourseCard';
 // import SimpleTable from "./SimpleTable";
 import { Breadcrumb, SimpleCard } from "app/components";
@@ -17,24 +17,23 @@ const Container = styled("div")(({ theme }) => ({
 }));
 
 
-const CategoryPage = () => {
+const Search_detial2 = () => {
   const { palette } = useTheme();
-
 
   return (
     <Container>
       <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: "Category", path: "/Course/default" }, { name: "Course" }]} />
+        <Breadcrumb routeSegments={[{ name: "Home", path: "/dashboard/default" }, { name: "Search for Course" }]} />
       </Box>
-{/*
-      <SimpleCard title=" Category ">
-      </SimpleCard>*/}
-        <CategoryPage2 />
+
+      <SimpleCard>
+        <Search_detail />
+      </SimpleCard>
 
 
     </Container>
   );
 };
 
-export default CategoryPage;
+export default Search_detial2;
 

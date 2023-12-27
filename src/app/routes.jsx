@@ -15,7 +15,7 @@ import CategoryPage from 'app/views/dashboard/CategoryPage';
 
 import EditCourse from 'app/views/dashboard/EditCourse'; 
 import ProfileRoutes from 'app/views/dashboard/ProfileRoutes'; // Import the EditCourse component
-
+import SearchRoutes from 'app/views/dashboard/SearchRoutes'; 
 
 
 const routes = [
@@ -35,6 +35,7 @@ const routes = [
       ...Member_Reg_Routes,
       ...CourselistRoutes,
       ...ProfileRoutes,
+      ...SearchRoutes,
       // Add the new route for EditCourse
       { path: 'edit/:id', element: <EditCourse /> },
       { path: '/Courseslist/category/:category', element: <CategoryPage /> },
@@ -48,6 +49,8 @@ const routes = [
   { path: '/', element: <Navigate to="MemberReg/default" /> }, 
   { path: '/', element: <Navigate to="Courseslist/default" /> }, 
   { path: '/', element: <Navigate to="page-layouts/user-profile/default" /> }, 
+  { path: '/', element: <Navigate to="page-layouts/Search/default" /> }, 
+
   { path: 'edit/:id', element: <EditCourse /> },
   { path: '/Courseslist/category/:category', element: <CategoryPage /> },
   { path: '*', element: <NotFound /> },

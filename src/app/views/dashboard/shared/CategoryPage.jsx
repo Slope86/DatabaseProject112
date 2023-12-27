@@ -91,7 +91,7 @@ const CategoryPage2 = () => {
         setData(coursesResponse.data);
         setTeachers(teachersResponse.data.teachers);
         // 更新标题
-        setTitle(selectedCategory !== "all_categories" ? `Modify ${selectedCategory} Courses` : "Modify Courses");
+        setTitle(selectedCategory !== "all_categories" ? ` ${selectedCategory} ` : "Modify Courses");
         setLoading(false); // 数据加载完成后设置 loading 为 false
       } catch (err) {
         setError(err);
