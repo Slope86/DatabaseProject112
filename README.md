@@ -1,8 +1,8 @@
-# 健身課程管理系統
+# Fit Lohas 健身課程管理系統
 
-## How to run the project
+## How to Run the Project
 
-1. Install and run frontend
+1. **Install and Run Frontend**
 
     ```bash
     # Clone the project
@@ -16,34 +16,81 @@
     yarn start
     ```
 
-1. Install and run backend from github repo [DatabaseProject112Backend](https://github.com/Slope86/DatabaseProject112Backend)
+    This will clone the project, install the required dependencies using yarn, and start the frontend application.
 
-## Project Descriptions
+2. **Install and Run Backend**
 
-1. The background of this database application:
-隨著社會對健康和健身的重視，使用健生房及報名健身課程的客戶也隨之增加，為了維護各種交互相關的複雜資料，故需要一個有效率的系統來做相關的管理。
+    Ensure the backend from the [DatabaseProject112Backend](https://github.com/Slope86/DatabaseProject112Backend) repository is installed and running.
 
-    此資料庫系統旨在管理健身房的日常運作和健身課程。它包括用戶註冊資訊、健身器材管理、課程時間表、教練資料及排班、會員訂閱等功能。使用者可以註冊、預訂課程、查看器材狀態、查看課程時間表等。
+## Project Description
 
-2. Useful queries for this database application:
-    - 搜尋特定課程：根據課程名稱或類別搜尋可用的健身課程。
-    - 會員資訊查詢：查詢會員的註冊訊息、課程情況等等。
-    - 教練排班表：顯示教練的工作時間表和所負責的課程。
-    - 場地借用：查詢場地是否已被借用。
-    - 會員報名課程：會員提交課程的報名申請。
+1. **Background of the Database Application**
 
-3. ER diagram for the database application:
+    In response to society's increased focus on health and fitness, the number of gym-goers and registrations for fitness courses has risen. To manage various interrelated and complex data, an efficient system is necessary.
 
-    Userdata (UPID ，username，phonenumber，sex，createdDate，modifyDate)
+    This database system is designed to manage the day-to-day operations of a fitness center and fitness courses. It includes functionalities such as user registration information, gym equipment management, course schedules, instructor details and scheduling, member subscriptions, etc. Users can register, book courses, check equipment status, and view course schedules, among other features.
 
-    Teacher(TID，name，createdDate，modifyDate)
+2. **Useful Queries for this Database Application**
 
-    Location(LSID，title，createdDate，modifyDate)
+    - **User register**: Register to be a member.
+    - **User profile**: Members can edit their personal information, including address, phone number, and other details, ensuring accurate and current profiles.
+    - **Search for specific courses**: Search for available fitness courses based on the course name or category.
+    - **Sign up for a course**: Members can sign up for the course they want to participate in.
+    - **Modify course information**: Make changes to course details in response to any modifications.
 
-    Course(CCID，LSID，TID，createdDate，modifyDate)
+3. **ER Diagram for the Database Application**
 
-    CourseDate(CCDID，CCID，courseDate，createdDate，modifyDate)
+    ```sql
+    users (
+        UserID INT AUTO_INCREMENT PRIMARY KEY,
+        Username VARCHAR(50) NOT NULL,
+        Email VARCHAR(100) UNIQUE NOT NULL,
+        PasswordHash VARCHAR(200) NOT NULL,
+        AvatarPath VARCHAR(200) DEFAULT '/assets/images/avatars/000-default.png ',
+        FullName VARCHAR(100),
+        UserRole VARCHAR(50) DEFAULT 'STUDENT',
+        PhoneNumber VARCHAR(20),
+        Address VARCHAR(200),
+        Gender ENUM('Male', 'Female', 'Other'),
+        CreatedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        ModifyDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    )
 
-    CourseEnter(CCEID，CCID，UPID，is_Active，createdDate，modifyDate)
+    teachers (
+        TeacherID INT AUTO_INCREMENT PRIMARY KEY,
+        UserID INT,
+        Salary DECIMAL(10, 2),
+        CreatedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        ModifyDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (UserID) REFERENCES users(UserID)
+    )
 
-    學員/教師 透過 Userdata / Teacher 建立基本資料。Course用於建立課程資料，其中有Location 場地資訊、Teacher教練資訊及 CourseDate 的上課日期。CourseEnter用於紀錄學員的報課資訊。
+    courses (
+        CourseID INT AUTO_INCREMENT PRIMARY KEY,
+        CourseName VARCHAR(100) NOT NULL,
+        CourseDescription VARCHAR(200) NOT NULL,
+        Category VARCHAR(50),
+        TeacherID INT,
+        CreatedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        ModifyDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (TeacherID) REFERENCES teachers(TeacherID)
+    )
+
+    CourseEnter (
+        CourseID INT,
+        UserID INT,
+        CreatedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        ModifyDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (CourseID) REFERENCES courses(CourseID),
+        FOREIGN KEY (UserID) REFERENCES users(UserID),
+        PRIMARY KEY (CourseID, UserID)
+    )
+    ```
+
+## Contributing
+
+Feel free to contribute by creating issues or pull requests.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE.md).
