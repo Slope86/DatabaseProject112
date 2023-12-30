@@ -38,7 +38,7 @@
     - **Sign up for a course**: Members can sign up for the course they want to participate in.
     - **Modify course information**: Make changes to course details in response to any modifications.
 
-3. **ER Diagram for the Database Application**
+3. **Database Schema Overview**
 
     ```sql
     users (
